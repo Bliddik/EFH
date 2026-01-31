@@ -13,7 +13,19 @@ let donats = {};  // {xuid: {status: 'paid', tag: 'vip', id: Date.now()}}
 bot.onText(/\/start/, (msg) => {
   bot.sendMessage(msg.chat.id, 'Привет! Введи свой XUID или ник:');
 });
+bot.on('message', (msg) => {
+  const chatId = msg.chat.id;
+  const username = msg.from.username || 'нет ника';
+  
+  console.log(`Получено сообщение от ${username} (${chatId}): ${msg.text}`);
+  
+  // Твой текущий код ответа
+  bot.sendMessage(chatId, `Твой ник: @${username}\nВипку выдадим скоро!`);
+});
 
+bot.on('successful_payment', (msg) => {
+  console.log('УСПЕШНАЯ ОПЛАТА!', msg.successful_payment);
+});
 bot.on('message', (msg) => {
   if (msg.text && !msg.text.startsWith('/')) {  // Сохраняем XUID/ник
     const xuid = msg.text;  // Валидация: если не число — ник
