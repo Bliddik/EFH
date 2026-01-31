@@ -3,7 +3,7 @@ console.log('Длина токена:', process.env.BOT_TOKEN?.length || 'нет
 const TelegramBot = require('node-telegram-bot-api');
 const fs = require('fs');  // Для простоты — файл; лучше Firebase
 
-const token = 'YOUR_BOT_TOKEN';  // Из BotFather
+const token = process.env.BOT_TOKEN;  // Берём из переменных окружения Render
 const providerToken = 'YOUR_PROVIDER_TOKEN';  // Из платежей
 const bot = new TelegramBot(token, { polling: true });
 
